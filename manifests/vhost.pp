@@ -57,6 +57,8 @@ define apache::vhost(
   $scriptaliases               = [],
   $proxy_dest                  = undef,
   $proxy_pass                  = undef,
+  $proxy_nocanon               = undef,
+  $allow_encoded_slashes       = undef,
   $suphp_addhandler            = $::apache::params::suphp_addhandler,
   $suphp_engine                = $::apache::params::suphp_engine,
   $suphp_configpath            = $::apache::params::suphp_configpath,

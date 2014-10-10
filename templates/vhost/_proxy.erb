@@ -5,6 +5,9 @@
 <%- end -%>
 <% if @proxy_preserve_host -%>
   ProxyPreserveHost On
+  <% if @allow_encoded_slashes -%>
+AllowEncodedSlashes On
+  <%- end -%>
 <%- end -%>
 <%- [@proxy_pass].flatten.compact.each do |proxy| -%>
   ProxyPass <%= proxy['path'] %> <%= proxy['url'] %>
@@ -22,7 +25,7 @@
 <%- Array(@no_proxy_uris).each do |uri| -%>
   ProxyPass        <%= uri %> !
 <% end -%>
-  ProxyPass          / <%= @proxy_dest %>/
+ProxyPass          / <%= @proxy_dest %>/ <% if @proxy_nocanon -%>nocanon<%- end %>
   <Location          />
     ProxyPassReverse <%= @proxy_dest %>/
   </Location>
